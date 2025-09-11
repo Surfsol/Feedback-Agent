@@ -1,0 +1,9 @@
+{
+    "1":{
+      "2.1.a": {"task": "Can say their name"},
+      "2.1.b": {"task": "Can ask someone for their name"},
+      "2.2": {"task": "Can use some possessive adjectives"},
+      "3.1": {"task": "Can spell their name and ask for the spelling of a word to be written down"},
+      "3.2": {"task": "Can use very basic polite stock phrases in a very limited way"}
+    }
+}
