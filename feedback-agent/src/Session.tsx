@@ -21,27 +21,40 @@ interface AllTasks {
   [key: string]: TaskNumProps;
 }
 
-interface StudentTaskNumProps {
-  [studentName: string]: TaskNumProps;
-}
+// students keyed by name
+type StudentTasks = Record<string, TaskNumProps>;
 
 const Session: React.FC<SessionProps> = ({ encounter_num }) => {
-  const [names, setNames] = useState<StudentTaskNumProps[]>([]);
-  const [newName, setNewName] = useState<string>('')
-  const [tasks, setTasks] = useState<TaskNumProps>(feedback[encounter_num]);
-  const [tasksArray] = useState<string[]>(Object.keys(feedback[encounter_num]));
-  const [taskNum, settaskNum] = useState<number>(0);
-  console.log({ feedback });
+  const [names, setNames] = useState<StudentTasks>({});
+  const [newName, setNewName] = useState<string>("");
+  const [tasks] = useState<TaskNumProps>(feedback[encounter_num]);
 
   console.log("in sessions", { names });
 
   const AddStudent = () => {
-    if (newName == ""){
-        // alert add new name
+    if (newName == "") {
+      // alert add new name
     }
     const studentTasks: TaskNumProps = JSON.parse(JSON.stringify(tasks));
-    setNames((prev) => [...prev, { [newName]: studentTasks }]);
-    setNewName("")
+    setNames((prev) => ({ ...prev, [newName]: studentTasks }));
+    setNewName("");
+  };
+
+  const Update_Success_Notes = (
+    value: string | boolean,
+    person: string,
+    task_num: string,
+    type: string
+  ) => {
+    console.log({ value, person, task_num, type });
+    //setNames(prev => ...prev)
+    setNames((prev) => ({
+      ...prev,
+      [person]: {
+        ...prev[person],
+        [task_num]: { ...prev[person][task_num], [type]: value },
+      },
+    }));
   };
 
   return (
@@ -59,27 +72,45 @@ const Session: React.FC<SessionProps> = ({ encounter_num }) => {
           style={{ width: "60px" }} // small input box
         />
         <button onClick={AddStudent}>Add</button>
-        {tasksArray &&
-          tasksArray.map((item) => {
-            return (
-              <div key={`name-${item}`}>
-                {" "}
-                {item}
-                <input
-                  id={`feed-${item}`}
-                  type='text'
-                  value={tasks[item]["notes"]}
-                  onChange={(e) =>
-                    setTasks({
-                      ...tasks,
-                      [item]: { ...tasks["item"], ["notes"]: e.target.value },
-                    })
-                  }
-                  style={{ width: "60px" }} // small input box
-                />
-              </div>
-            );
-          })}
+        {Object.keys(names).length > 0 &&
+          Object.keys(names).map((person) => (
+            <div key={`student-${person}`}>
+              <h3>{person}</h3>
+              {Object.keys(names[person]).map((task_num) => {
+                return (
+                  <div key={`name-${person}-${task_num}`}>
+                    {task_num}
+                    <input
+                      id={`${person}-${task_num}-success`}
+                      type='checkbox'
+                      checked={names[person][task_num]["success"]}
+                      onChange={(e) =>
+                        Update_Success_Notes(
+                          e.target.checked,
+                          person,
+                          task_num,
+                          "success"
+                        )
+                      }
+                    />
+                    <input
+                      id={`notes-${person}-${task_num}`}
+                      type='text'
+                      value={names[person][task_num]["notes"]}
+                      onChange={(e) =>
+                        Update_Success_Notes(
+                          e.target.value,
+                          person,
+                          task_num,
+                          "notes"
+                        )
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ))}
       </div>
     </>
   );
