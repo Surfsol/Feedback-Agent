@@ -21,14 +21,29 @@ interface AllTasks {
   [key: string]: TaskNumProps;
 }
 
+interface StudentTaskNumProps {
+  [studentName: string]: TaskNumProps;
+}
+
 const Session: React.FC<SessionProps> = ({ encounter_num }) => {
-  const [names, setNames] = useState<string[]>([]);
+  const [names, setNames] = useState<StudentTaskNumProps[]>([]);
+  const [newName, setNewName] = useState<string>('')
   const [tasks, setTasks] = useState<TaskNumProps>(feedback[encounter_num]);
   const [tasksArray] = useState<string[]>(Object.keys(feedback[encounter_num]));
   const [taskNum, settaskNum] = useState<number>(0);
   console.log({ feedback });
 
-  console.log("in sessions", { tasksArray });
+  console.log("in sessions", { names });
+
+  const AddStudent = () => {
+    if (newName == ""){
+        // alert add new name
+    }
+    const studentTasks: TaskNumProps = JSON.parse(JSON.stringify(tasks));
+    setNames((prev) => [...prev, { [newName]: studentTasks }]);
+    setNewName("")
+  };
+
   return (
     <>
       <div>This Session</div>
@@ -37,14 +52,13 @@ const Session: React.FC<SessionProps> = ({ encounter_num }) => {
         {" "}
         Name :{" "}
         <input
-          id='add-name-1'
+          id='new-name'
           type='text'
-          value={names[0]}
-          onChange={(e) =>
-            setNames((prev) => [...prev, (names[0] = e.target.value)])
-          }
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
           style={{ width: "60px" }} // small input box
         />
+        <button onClick={AddStudent}>Add</button>
         {tasksArray &&
           tasksArray.map((item) => {
             return (
