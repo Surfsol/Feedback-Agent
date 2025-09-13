@@ -44,13 +44,14 @@ const Session: React.FC<SessionProps> = ({
   console.log({ session_code, current_session });
 
   const handleGetFeedBack = async () => {
+    const objPost = {'lesson': encounter_num, 'code': session_code, 'comments': current_session}
     try {
       const response = await fetch("http://127.0.0.1:5000/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(current_session),
+        body: JSON.stringify(objPost),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
