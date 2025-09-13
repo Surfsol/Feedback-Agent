@@ -43,6 +43,26 @@ const Session: React.FC<SessionProps> = ({
 
   console.log({ session_code, current_session });
 
+  const handleGetFeedBack = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(current_session),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      
+      console.log({ data });
+    } catch (error) {
+      console.error("Error sending data:", error);
+    }
+  };
+
   const AddStudent = () => {
     if (newName != "" && encounter_num) {
       const tasks = feedback[encounter_num];
@@ -61,7 +81,6 @@ const Session: React.FC<SessionProps> = ({
     task_num: string,
     type: string
   ) => {
-
     setSessions((prev) => ({
       ...prev,
       [session_code]: {
@@ -75,10 +94,6 @@ const Session: React.FC<SessionProps> = ({
         },
       },
     }));
-  };
-
-  const handleGetFeedBack = (num: string) => {
-    console.log(num);
   };
 
   return (
@@ -96,7 +111,7 @@ const Session: React.FC<SessionProps> = ({
           style={{ width: "60px" }} // small input box
         />
         <button onClick={AddStudent}>Add</button>
-        <button onClick={() => handleGetFeedBack(encounter_num)}>
+        <button onClick={() => handleGetFeedBack()}>
           Get FeedBack
         </button>
         {Object.keys(current_session).length > 0 &&
