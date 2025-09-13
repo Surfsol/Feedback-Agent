@@ -1,12 +1,5 @@
 import { useState } from "react";
 import Session from "./Session";
-import rawFeedback from "./encounters.json";
-
-const feedback = rawFeedback as AllTasks;
-
-interface AllTasks {
-  [key: string] : TaskNumProps
-}
 
 interface TaskObj {
   task: string;
@@ -22,29 +15,24 @@ interface TaskNumProps {
 type StudentTasks = Record<string, TaskNumProps>;
 
 interface SessionStudentTasks {
-    [sessionCode: string] : StudentTasks
-}   
+  [sessionCode: string]: StudentTasks;
+}
 
 function App() {
   const [sessions, setSessions] = useState<SessionStudentTasks>({});
-  const [createNew, setCreateNew] = useState<string>('');
-  const [newName, setNewName] = useState('')
-//  const [encounter, setEncounter] = useState<number | undefined>();
+  const [createNew, setCreateNew] = useState<string>("");
 
   const handleNew = () => {
     const now = new Date().toString();
     const match = now.match(/\b\d{2}:\d{2}:\d{2}\b/);
     // add a new session for encounter number
     if (createNew) {
-      const taskObj = feedback[createNew]
-      const studentTasks: TaskNumProps = JSON.parse(JSON.stringify(taskObj));
-      const objKey = `${createNew}-${match}`
-      setSessions((prev) => ({...prev, [objKey] : {...prev[objKey], [newName] : studentTasks}}));
-      setCreateNew('');
-      setNewName('')
+      const objKey = `${createNew}-${match}`;
+      setSessions((prev) => ({ ...prev, [objKey]: { ...prev[objKey] } }));
+      setCreateNew("");
     }
   };
-  console.log({sessions})
+  console.log({ sessions });
 
   return (
     <>
@@ -52,6 +40,7 @@ function App() {
       <div>
         <label htmlFor='encounter-num'>Encounter</label>
         <br />
+        <label htmlFor='createNew-num'>Encounter Num</label>
         <input
           id='createNew-num'
           type='text'
@@ -60,22 +49,27 @@ function App() {
           style={{ width: "60px" }} // small input box
         />
         <br />
-        <input
-          id='createNew-name'
-          type='text'
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-          style={{ width: "60px" }} // small input box
-        />
-        <br />
       </div>
       <button onClick={handleNew}>Create New Session</button>
       <div>Sessions</div>
       {Object.keys(sessions).length > 0 &&
         Object.keys(sessions).map((code) => (
-           <div key={code} id={`session-${code}`}>
+          <div
+            key={code}
+            id={`session-${code}`}
+            style={{
+              border: "1px solid #ccc", // light gray border
+              borderRadius: "8px", // rounded corners
+              padding: "10px", // space inside the box
+              marginBottom: "15px", // space between sections
+            }}
+          >
             {" "}
-            <Session session_code={code} current_session = {sessions[code]} setSessions={setSessions} />{" "}
+            <Session
+              session_code={code}
+              current_session={sessions[code]}
+              setSessions={setSessions}
+            />{" "}
           </div>
         ))}
     </>
