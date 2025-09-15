@@ -21,11 +21,67 @@
       "success": true,
       "notes": ""
     },
-    "4.0":{
+    "4.0": {
       "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Complimentary_Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Social Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Pass": {
+      "task": "Have a sufficent understanding of Encounter",
+      "success": true,
+      "notes": ""
+    }
+  },
+  "2": {
+    "2.1": {
+      "task": "Can name cardinal numbers up to 10",
+      "success": true,
+      "notes": ""
+    },
+    "2.2": {
+      "task": "Can say telephone numbers with visual support / Can ask for and give a phone number",
+      "success": true,
+      "notes": ""
+    },
+    "2.3": {
+      "task": "Can name own nationality and country",
+      "success": true,
+      "notes": ""
+    },
+    "3.1": {
+      "task": "Can ask very basic questions with what, where and how",
+      "success": true,
+      "notes": ""
+    },
+    "4.0": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Complimentary_Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Social Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Pass": {
+      "task": "Have a sufficent understanding of Encounter",
       "success": true,
       "notes": ""
     }
   }
 }
-
