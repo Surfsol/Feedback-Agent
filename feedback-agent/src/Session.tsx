@@ -60,7 +60,6 @@ const Session: React.FC<SessionProps> = ({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("666666666666666666677777777777", data.feedback.feedback);
       setResponseData(data.feedback.feedback);
     } catch (error) {
       console.error("Error sending data:", error);

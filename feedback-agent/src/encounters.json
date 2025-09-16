@@ -83,5 +83,109 @@
       "success": true,
       "notes": ""
     }
+  },
+  "9": {
+    "2.1.a": {
+      "task": "Can name a few very common household pets and animals",
+      "success": true,
+      "notes": ""
+    },
+    "2.1.b": {
+      "task": "Can use some very basic survival phrases",
+      "success": true,
+      "notes": ""
+    },
+    "2.2.a": {
+      "task": "Can use it + be to talk about a subject",
+      "success": true,
+      "notes": ""
+    },
+    "2.2.b": {
+      "task": "Can name a few very common weather conditions",
+      "success": true,
+      "notes": ""
+    },
+    "3.1.a": {
+      "task": "Can answer present simple yes/no questions with short answers",
+      "success": true,
+      "notes": ""
+    },
+      "4.0": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Complimentary_Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Social Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Pass": {
+      "task": "Have a sufficent understanding of Encounter",
+      "success": true,
+      "notes": ""
+    }
+  },
+  "11": {
+    "2.1.a": {
+      "task": "Can use basic language related to prices in common currencies",
+      "success": true,
+      "notes": ""
+    },
+    "2.2.a": {
+      "task": "Can name very common types of shops",
+      "success": true,
+      "notes": ""
+    },
+    "2.2.b": {
+      "task": "Can use some basic language related to prices",
+      "success": true,
+      "notes": ""
+    },
+    "3.1.a": {
+      "task": "Can use a/an with single countable nouns with some control",
+      "success": true,
+      "notes": ""
+    },
+    "3.1.b": {
+      "task": "Can use the definite article to refer to a specific example of something",
+      "success": true,
+      "notes": ""
+    },
+    "3.2.a": {
+      "task": "Can say something is present using there + be",
+      "success": true,
+      "notes": ""
+    },
+    "3.2.b": {
+      "task": "Can use a/an with single countable nouns with some control",
+      "success": true,
+      "notes": ""
+    },
+      "4.0": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Complimentary_Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Social Class": {
+      "task": "Fluency",
+      "success": true,
+      "notes": ""
+    },
+    "Pass": {
+      "task": "Have a sufficent understanding of Encounter",
+      "success": true,
+      "notes": ""
+    }
   }
 }
