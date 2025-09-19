@@ -1,191 +1,191 @@
 {
   "1": {
-    "2.1.a": { "task": "Can say their name", "success": true, "notes": "" },
+    "2.1.a": { "task": "Can say their name", "success": true, "correct": "", "incorrect":"" },
     "2.1.b": {
       "task": "Can ask someone for their name",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.2": {
       "task": "Can use some possessive adjectives",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.1": {
       "task": "Can spell their name and ask for the spelling of a word to be written down",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.2": {
       "task": "Can use very basic polite stock phrases in a very limited way",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "4.0": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Complimentary_Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Social Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Pass": {
       "task": "Have a sufficent understanding of Encounter",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     }
   },
   "2": {
     "2.1": {
       "task": "Can name cardinal numbers up to 10",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.2": {
       "task": "Can say telephone numbers with visual support / Can ask for and give a phone number",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.3": {
       "task": "Can name own nationality and country",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.1": {
       "task": "Can ask very basic questions with what, where and how",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "4.0": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Complimentary_Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Social Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Pass": {
       "task": "Have a sufficent understanding of Encounter",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     }
   },
   "9": {
     "2.1.a": {
       "task": "Can name a few very common household pets and animals",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.1.b": {
       "task": "Can use some very basic survival phrases",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.2.a": {
       "task": "Can use it + be to talk about a subject",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.2.b": {
       "task": "Can name a few very common weather conditions",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.1.a": {
       "task": "Can answer present simple yes/no questions with short answers",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
       "4.0": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Complimentary_Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Social Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Pass": {
       "task": "Have a sufficent understanding of Encounter",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     }
   },
   "11": {
     "2.1.a": {
       "task": "Can use basic language related to prices in common currencies",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.2.a": {
       "task": "Can name very common types of shops",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "2.2.b": {
       "task": "Can use some basic language related to prices",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.1.a": {
       "task": "Can use a/an with single countable nouns with some control",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.1.b": {
       "task": "Can use the definite article to refer to a specific example of something",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.2.a": {
       "task": "Can say something is present using there + be",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "3.2.b": {
       "task": "Can use a/an with single countable nouns with some control",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
       "4.0": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Complimentary_Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Social Class": {
       "task": "Fluency",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     },
     "Pass": {
       "task": "Have a sufficent understanding of Encounter",
       "success": true,
-      "notes": ""
+      "correct": "", "incorrect": ""
     }
   }
 }
