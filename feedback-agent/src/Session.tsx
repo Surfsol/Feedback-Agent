@@ -10,7 +10,8 @@ interface AllTasks {
 interface TaskObj {
   task: string;
   success: boolean; // or boolean if you want
-  notes: string;
+  correct: string;
+  incorrect: string;
 }
 
 interface TaskNumProps {
@@ -97,6 +98,7 @@ const Session: React.FC<SessionProps> = ({
         },
       },
     }));
+ 
   };
 
   const copyToClipboard = () => {
@@ -139,15 +141,30 @@ const Session: React.FC<SessionProps> = ({
                       }
                     />
                     <input
-                      id={`notes-${person}-${task_num}`}
+                      id={`correct-${person}-${task_num}`}
                       type='text'
-                      value={current_session[person][task_num]["notes"]}
+                      value={current_session[person][task_num]["correct"]}
+                      placeholder="correct"
                       onChange={(e) =>
                         Update_Success_Notes(
                           e.target.value,
                           person,
                           task_num,
-                          "notes"
+                          "correct"
+                        )
+                      }
+                    />
+                     <input
+                      id={`incorrect-${person}-${task_num}`}
+                      type='text'
+                      value={current_session[person][task_num]["incorrect"]}
+                      placeholder="incorrect"
+                      onChange={(e) =>
+                        Update_Success_Notes(
+                          e.target.value,
+                          person,
+                          task_num,
+                          "incorrect"
                         )
                       }
                     />
