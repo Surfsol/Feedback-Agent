@@ -214,7 +214,7 @@
     },
     "2.2": {
       "task": "Can use very general language related to a match or sporting event",
-      "success": false,
+      "success": true,
       "correct": "",
       "incorrect": ""
     },
@@ -226,7 +226,7 @@
     },
     "3.2": {
       "task": "Can use the past simple when referring to finished time",
-      "success": false,
+      "success": true,
       "correct": "",
       "incorrect": ""
     },
@@ -264,13 +264,13 @@
     },
     "3.1.a": {
       "task": "Can describe an action that has just finished and explains a current situation",
-      "success": false,
+      "success": true,
       "correct": "",
       "incorrect": ""
     },
     "3.1.b": {
       "task": "Can describe an action or situation that started in the past and is still continuing now",
-      "success": false,
+      "success": true,
       "correct": "",
       "incorrect": ""
     },
