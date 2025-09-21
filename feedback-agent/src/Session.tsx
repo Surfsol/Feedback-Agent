@@ -44,23 +44,22 @@ const Session: React.FC<SessionProps> = ({
   const [newName, setNewName] = useState<string>("");
 
   const handleGetFeedBack = async () => {
-    let objNotes:any = {}
-    console.log({current_session})
-    Object.keys(current_session).map((name)=>{
-      console.log({name})
-      Object.keys(current_session[name]).map((task)=> {
-        console.log({task})
-        if ((current_session[name][task]["correct"] != "") || (current_session[name][task]["incorrect"] != "")){
-          if (!objNotes[name]){
-            objNotes[name] = {}
+    let objNotes: any = {};
+    Object.keys(current_session).map((name) => {
+      Object.keys(current_session[name]).map((task) => {
+        if (
+          current_session[name][task]["correct"] != "" ||
+          current_session[name][task]["incorrect"] != ""
+        ) {
+          if (!objNotes[name]) {
+            objNotes[name] = {};
           }
-          objNotes[name][task] = current_session[name][task]
+          objNotes[name][task] = current_session[name][task];
         }
-        objNotes[name]['Pass'] = current_session[name]['Pass']
-      })
-    })
-    
-    console.log({objNotes})
+        objNotes[name]["Pass"] = current_session[name]["Pass"];
+      });
+    });
+
     const objPost = {
       lesson: encounter_num,
       code: session_code,
@@ -78,7 +77,10 @@ const Session: React.FC<SessionProps> = ({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       let data = await response.json();
-      setResponseData(data.feedback.feedback + "Attend complimentary classes for extra practice. Attend social classes for fluency practice.  Don't forget to book your next encounter.");
+      setResponseData(
+        data.feedback.feedback +
+          "Attend complimentary classes for extra practice. Attend social classes for fluency practice.  Don't forget to book your next encounter."
+      );
     } catch (error) {
       console.error("Error sending data:", error);
     }
@@ -115,7 +117,6 @@ const Session: React.FC<SessionProps> = ({
         },
       },
     }));
- 
   };
 
   const copyToClipboard = () => {
@@ -161,7 +162,10 @@ const Session: React.FC<SessionProps> = ({
                       id={`correct-${person}-${task_num}`}
                       type='text'
                       value={current_session[person][task_num]["correct"]}
-                      placeholder="correct"
+                      placeholder='correct'
+                      style={{ transition: "all 0.2s ease", width: "120px" }}
+                      onFocus={(e) => (e.target.style.width = "250px")}
+                      onBlur={(e) => (e.target.style.width = "120px")}
                       onChange={(e) =>
                         Update_Success_Notes(
                           e.target.value,
@@ -171,11 +175,14 @@ const Session: React.FC<SessionProps> = ({
                         )
                       }
                     />
-                     <input
+                    <input
                       id={`incorrect-${person}-${task_num}`}
                       type='text'
                       value={current_session[person][task_num]["incorrect"]}
-                      placeholder="incorrect"
+                      placeholder='incorrect'
+                      style={{ transition: "all 0.2s ease", width: "120px" }}
+                      onFocus={(e) => (e.target.style.width = "250px")}
+                      onBlur={(e) => (e.target.style.width = "120px")}
                       onChange={(e) =>
                         Update_Success_Notes(
                           e.target.value,
