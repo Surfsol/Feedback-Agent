@@ -31,6 +31,10 @@ interface SessionProps {
   setSessions: React.Dispatch<React.SetStateAction<SessionStudentTasks>>;
 }
 
+interface ResponseDataProps {
+  [person: string]: {"feedback": ""};
+}
+
 const Session: React.FC<SessionProps> = ({
   session_code,
   current_session,
@@ -40,10 +44,26 @@ const Session: React.FC<SessionProps> = ({
     const match = session_code.match(/^([^-\s]+)/);
     return match ? match[1] : "";
   });
-  const [responseData, setResponseData] = useState<string>("");
+  const [responseData, setResponseData] = useState<ResponseDataProps>();
   const [newName, setNewName] = useState<string>("");
 
   const handleGetFeedBack = async () => {
+    let objNotes: any = {};
+    Object.keys(current_session).map((name) => {
+      Object.keys(current_session[name]).map((task) => {
+        if (
+          current_session[name][task]["correct"] != "" ||
+          current_session[name][task]["incorrect"] != ""
+        ) {
+          if (!objNotes[name]) {
+            objNotes[name] = {};
+          }
+          objNotes[name][task] = current_session[name][task];
+        }
+        objNotes[name]["Pass"] = current_session[name]["Pass"];
+      });
+    });
+
     const objPost = {
       lesson: encounter_num,
       code: session_code,
@@ -60,8 +80,8 @@ const Session: React.FC<SessionProps> = ({
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const data = await response.json();
-      setResponseData(data.feedback.feedback);
+      let data = await response.json();
+      setResponseData(data.feedback);
     } catch (error) {
       console.error("Error sending data:", error);
     }
@@ -98,11 +118,10 @@ const Session: React.FC<SessionProps> = ({
         },
       },
     }));
- 
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(responseData);
+  const copyToClipboard = (text : string) => {
+    navigator.clipboard.writeText(text);
   };
 
   return (
@@ -121,78 +140,87 @@ const Session: React.FC<SessionProps> = ({
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         {Object.keys(current_session).length > 0 &&
           Object.keys(current_session).map((person) => (
-            <div key={`student-${person}`}>
-              <h3>{person}</h3>
-              {Object.keys(current_session[person]).map((task_num) => {
-                return (
-                  <div key={`name-${person}-${task_num}`}>
-                    {task_num}
-                    <input
-                      id={`${person}-${task_num}-success`}
-                      type='checkbox'
-                      checked={current_session[person][task_num]["success"]}
-                      onChange={(e) =>
-                        Update_Success_Notes(
-                          e.target.checked,
-                          person,
-                          task_num,
-                          "success"
-                        )
-                      }
-                    />
-                    <input
-                      id={`correct-${person}-${task_num}`}
-                      type='text'
-                      value={current_session[person][task_num]["correct"]}
-                      placeholder="correct"
-                      onChange={(e) =>
-                        Update_Success_Notes(
-                          e.target.value,
-                          person,
-                          task_num,
-                          "correct"
-                        )
-                      }
-                    />
-                     <input
-                      id={`incorrect-${person}-${task_num}`}
-                      type='text'
-                      value={current_session[person][task_num]["incorrect"]}
-                      placeholder="incorrect"
-                      onChange={(e) =>
-                        Update_Success_Notes(
-                          e.target.value,
-                          person,
-                          task_num,
-                          "incorrect"
-                        )
-                      }
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <>
+              <div key={`student-${person}`}>
+                <h3>{person}</h3>
+                {Object.keys(current_session[person]).map((task_num) => {
+                  return (
+                    <div key={`name-${person}-${task_num}`}>
+                      {task_num}
+                      <input
+                        id={`${person}-${task_num}-success`}
+                        type='checkbox'
+                        checked={current_session[person][task_num]["success"]}
+                        onChange={(e) =>
+                          Update_Success_Notes(
+                            e.target.checked,
+                            person,
+                            task_num,
+                            "success"
+                          )
+                        }
+                      />
+                      <input
+                        id={`correct-${person}-${task_num}`}
+                        type='text'
+                        value={current_session[person][task_num]["correct"]}
+                        placeholder='correct'
+                        style={{ transition: "all 0.2s ease", width: "80px" }}
+                        onFocus={(e) => (e.target.style.width = "250px")}
+                        onBlur={(e) => (e.target.style.width = "80px")}
+                        onChange={(e) =>
+                          Update_Success_Notes(
+                            e.target.value,
+                            person,
+                            task_num,
+                            "correct"
+                          )
+                        }
+                      />
+                      <input
+                        id={`incorrect-${person}-${task_num}`}
+                        type='text'
+                        value={current_session[person][task_num]["incorrect"]}
+                        placeholder='incorrect'
+                        style={{ transition: "all 0.2s ease", width: "80px" }}
+                        onFocus={(e) => (e.target.style.width = "250px")}
+                        onBlur={(e) => (e.target.style.width = "80px")}
+                        onChange={(e) =>
+                          Update_Success_Notes(
+                            e.target.value,
+                            person,
+                            task_num,
+                            "incorrect"
+                          )
+                        }
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              {responseData && responseData[person] && (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    border: "1px solid #ccc",
+                    padding: "5px 10px",
+                    borderRadius: "6px",
+                    backgroundColor: "#f9f9f9",
+                    color: "#000",
+                    maxWidth: "50%", // 🚨 limits width to half of page
+                    wordWrap: "break-word", // wraps long words
+                    whiteSpace: "pre-wrap", // preserves line breaks
+                    overflowWrap: "break-word",
+                  }}
+                >
+                  <span style={{ flex: 1 }}>{responseData[person]["feedback"]}</span>
+                  <button onClick={() => copyToClipboard(responseData[person]["feedback"])}>Copy</button>
+                </div>
+              )}
+            </>
           ))}
-        {responseData && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              border: "1px solid #ccc",
-              padding: "5px 10px",
-              borderRadius: "6px",
-              backgroundColor: "#f9f9f9",
-              maxWidth: "50%", // 🚨 limits width to half of page
-              wordWrap: "break-word", // wraps long words
-              whiteSpace: "pre-wrap", // preserves line breaks
-              overflowWrap: "break-word",
-            }}
-          >
-            <span style={{ flex: 1 }}>{responseData}</span>
-            <button onClick={copyToClipboard}>Copy</button>
-          </div>
-        )}
       </div>
     </>
   );

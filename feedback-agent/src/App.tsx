@@ -4,7 +4,8 @@ import Session from "./Session";
 interface TaskObj {
   task: string;
   success: boolean; // or boolean if you want
-  notes: string;
+  correct: string;
+  incorrect: string;
 }
 
 interface TaskNumProps {
@@ -35,12 +36,12 @@ function App() {
   console.log({ sessions });
 
   return (
-    <>
+    <div style={{ backgroundColor: "#001f3f", minHeight: "100vh", color: "white", padding: "20px" }}>
       <h1>WSE Feedback</h1>
       <div>
         <label htmlFor='encounter-num'>Encounter</label>
         <br />
-        <label htmlFor='createNew-num'>Encounter Num</label>
+        <label htmlFor='createNew-num' style={{ marginRight: "8px" }}>Encounter #</label>
         <input
           id='createNew-num'
           type='text'
@@ -72,7 +73,7 @@ function App() {
             />{" "}
           </div>
         ))}
-    </>
+    </div>
   );
 }
 
