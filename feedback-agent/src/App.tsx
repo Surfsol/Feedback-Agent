@@ -4,7 +4,8 @@ import Session from "./Session";
 interface TaskObj {
   task: string;
   success: boolean; // or boolean if you want
-  notes: string;
+  correct: string;
+  incorrect: string;
 }
 
 interface TaskNumProps {

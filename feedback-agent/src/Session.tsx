@@ -44,6 +44,23 @@ const Session: React.FC<SessionProps> = ({
   const [newName, setNewName] = useState<string>("");
 
   const handleGetFeedBack = async () => {
+    let objNotes:any = {}
+    console.log({current_session})
+    Object.keys(current_session).map((name)=>{
+      console.log({name})
+      Object.keys(current_session[name]).map((task)=> {
+        console.log({task})
+        if ((current_session[name][task]["correct"] != "") || (current_session[name][task]["incorrect"] != "")){
+          if (!objNotes[name]){
+            objNotes[name] = {}
+          }
+          objNotes[name][task] = current_session[name][task]
+        }
+        objNotes[name]['Pass'] = current_session[name]['Pass']
+      })
+    })
+    
+    console.log({objNotes})
     const objPost = {
       lesson: encounter_num,
       code: session_code,
@@ -60,8 +77,8 @@ const Session: React.FC<SessionProps> = ({
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const data = await response.json();
-      setResponseData(data.feedback.feedback);
+      let data = await response.json();
+      setResponseData(data.feedback.feedback + "Attend complimentary classes for extra practice. Attend social classes for fluency practice.  Don't forget to book your next encounter.");
     } catch (error) {
       console.error("Error sending data:", error);
     }
