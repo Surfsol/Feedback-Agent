@@ -80,7 +80,7 @@
       "correct": "",
       "incorrect": ""
     },
-     "Notes": {
+    "Notes": {
       "task": "Fluency",
       "success": true,
       "correct": "",
@@ -130,7 +130,7 @@
       "correct": "",
       "incorrect": ""
     },
-     "Notes": {
+    "Notes": {
       "task": "Fluency",
       "success": true,
       "correct": "",
@@ -192,7 +192,7 @@
       "correct": "",
       "incorrect": ""
     },
-     "Notes": {
+    "Notes": {
       "task": "Fluency",
       "success": true,
       "correct": "",
@@ -286,7 +286,7 @@
       "correct": "",
       "incorrect": ""
     },
-     "Notes": {
+    "Notes": {
       "task": "Fluency",
       "success": true,
       "correct": "",
@@ -294,6 +294,156 @@
     },
     "Pass": {
       "task": "Have a sufficent understanding of Encounter",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    }
+  },
+  "61": {
+    "2.1.a": {
+      "task": "Can use a range of language related to issues regarding education and learning",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "2.1.b": {
+      "task": "Can use a range of language related to different education systems",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "2.2": {
+      "task": "Can use a range of language related to the learning process",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "3.1": {
+      "task": "Can describe something that was expected to happen but didn’t",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "3.2": {
+      "task": "Can criticise past actions and express regret using should/could have",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "4.0": {
+      "task": "Fluency",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "Notes": {
+      "task": "Fluency",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "Pass": {
+      "task": "Have a sufficient understanding of Encounter",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    }
+  },
+  "67": {
+    "2.1": {
+      "task": "Can use general language related to the advantages/disadvantages of technology",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "2.2.a": {
+      "task": "Can use appropriate language related to expressing or reacting to bad temper",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "2.2.b": {
+      "task": "Can use informal language related to denying or attaching blame politely",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "3.1": {
+      "task": "Can use a range of devices to conclude a discursive argument",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "3.2": {
+      "task": "Can make tentative suggestions and offers using could, should and shall",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "4.0": {
+      "task": "Fluency",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "Notes": {
+      "task": "Fluency",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "Pass": {
+      "task": "Have a sufficient understanding of Encounter",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    }
+  },
+  "75": {
+    "2.1": {
+      "task": "Can use detailed language related to television and broadcasting",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "2.2.a": {
+      "task": "Can use a wide range of idiomatic expressions to emphasize a thought, opinion, or idea in a conversation with one or more native speakers",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "2.2.b": {
+      "task": "Can naturally use idiomatic language (e.g., keep our minds open) to express an attitude, opinion, or idea",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "3.1": {
+      "task": "Precise use of present perfect",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "3.2": {
+      "task": "Use of root word and alternative affixes",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "4.0": {
+      "task": "Fluency",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+   "Notes": {
+      "task": "Fluency",
+      "success": true,
+      "correct": "",
+      "incorrect": ""
+    },
+    "Pass": {
+      "task": "Have a sufficient understanding of Encounter",
       "success": true,
       "correct": "",
       "incorrect": ""

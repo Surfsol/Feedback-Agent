@@ -35,6 +35,10 @@ interface ResponseDataProps {
   [person: string]: {"feedback": ""};
 }
 
+// to add Modal input
+// voice input
+// Rag, to get examples that are not straight forward
+
 const Session: React.FC<SessionProps> = ({
   session_code,
   current_session,
@@ -52,6 +56,7 @@ const Session: React.FC<SessionProps> = ({
     Object.keys(current_session).map((name) => {
       Object.keys(current_session[name]).map((task) => {
         if (
+          task == 'Pass' ||
           current_session[name][task]["correct"] != "" ||
           current_session[name][task]["incorrect"] != ""
         ) {
@@ -60,7 +65,6 @@ const Session: React.FC<SessionProps> = ({
           }
           objNotes[name][task] = current_session[name][task];
         }
-        objNotes[name]["Pass"] = current_session[name]["Pass"];
       });
     });
 
