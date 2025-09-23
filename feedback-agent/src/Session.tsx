@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import rawFeedback from "./encounters.json";
+import InputModal from "./InputModal";
 
 const feedback = rawFeedback as AllTasks;
 
@@ -50,6 +51,11 @@ const Session: React.FC<SessionProps> = ({
   });
   const [responseData, setResponseData] = useState<ResponseDataProps>();
   const [newName, setNewName] = useState<string>("");
+  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [modalValue, setModalValue] = useState<string>('')
+  const [feedType, setFeedType] = useState<string>('')
+  const [modalTaskNum, setModalTaskNum] = useState<string>('')
+  const [modalPerson, setModalPerson] = useState<string>('')
 
   const handleGetFeedBack = async () => {
     let objNotes: any = {};
@@ -103,7 +109,15 @@ const Session: React.FC<SessionProps> = ({
     }
   };
 
-  const Update_Success_Notes = (
+  const handleInputModal=(current_value: string, person: string, task_num: string, type: string)=>{
+      setModalValue(current_value)
+      setFeedType(type)
+      setModalTaskNum(task_num)
+      setModalPerson(person)
+      setOpenModal(true)
+    }
+
+  const update_Success_Notes = (
     value: string | boolean,
     person: string,
     task_num: string,
@@ -130,7 +144,6 @@ const Session: React.FC<SessionProps> = ({
 
   return (
     <>
-      <div>This Session</div>
       <div>Encounter: {encounter_num}</div> Name :{" "}
       <input
         id='new-name'
@@ -140,7 +153,7 @@ const Session: React.FC<SessionProps> = ({
         style={{ width: "60px" }} // small input box
       />
       <button onClick={AddStudent}>Add</button>
-      <button onClick={() => handleGetFeedBack()}>Get FeedBack</button>
+      <button onClick={() => handleGetFeedBack()} style={{ margin: "10px" }}>Get FeedBack</button>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         {Object.keys(current_session).length > 0 &&
           Object.keys(current_session).map((person) => (
@@ -149,6 +162,7 @@ const Session: React.FC<SessionProps> = ({
                 <h3>{person}</h3>
                 {Object.keys(current_session[person]).map((task_num) => {
                   return (
+                    <>
                     <div key={`name-${person}-${task_num}`}>
                       {task_num}
                       <input
@@ -156,7 +170,7 @@ const Session: React.FC<SessionProps> = ({
                         type='checkbox'
                         checked={current_session[person][task_num]["success"]}
                         onChange={(e) =>
-                          Update_Success_Notes(
+                          update_Success_Notes(
                             e.target.checked,
                             person,
                             task_num,
@@ -169,36 +183,36 @@ const Session: React.FC<SessionProps> = ({
                         type='text'
                         value={current_session[person][task_num]["correct"]}
                         placeholder='correct'
-                        style={{ transition: "all 0.2s ease", width: "80px" }}
-                        onFocus={(e) => (e.target.style.width = "250px")}
-                        onBlur={(e) => (e.target.style.width = "80px")}
-                        onChange={(e) =>
-                          Update_Success_Notes(
-                            e.target.value,
+                        style={{ width: "40px" }}
+                        onClick={() =>
+                          handleInputModal(
+                            current_session[person][task_num]["correct"],
                             person,
                             task_num,
                             "correct"
                           )
                         }
                       />
+                      {current_session[person][task_num]["success"] == false && 
                       <input
                         id={`incorrect-${person}-${task_num}`}
                         type='text'
                         value={current_session[person][task_num]["incorrect"]}
                         placeholder='incorrect'
-                        style={{ transition: "all 0.2s ease", width: "80px" }}
-                        onFocus={(e) => (e.target.style.width = "250px")}
-                        onBlur={(e) => (e.target.style.width = "80px")}
-                        onChange={(e) =>
-                          Update_Success_Notes(
-                            e.target.value,
+                        style={{ width: "50px" }}
+                        onClick={() =>
+                          handleInputModal(
+                            current_session[person][task_num]["incorrect"],
                             person,
                             task_num,
                             "incorrect"
                           )
                         }
-                      />
+                      />}
+                      
                     </div>
+                    {openModal && <InputModal key={`input-modal${modalPerson}-${modalTaskNum}`} modalValue={modalValue} setModalValue={setModalValue} person={modalPerson} task_num={modalTaskNum} feedType={feedType} update_Success_Notes={update_Success_Notes} setOpenModal={setOpenModal}/>}
+                    </>
                   );
                 })}
               </div>
