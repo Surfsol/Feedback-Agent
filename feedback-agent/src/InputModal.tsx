@@ -1,12 +1,16 @@
+import type { StudentRecord } from "./types/interfaces";
+
 interface InputModalProps {
   modalValue: string;
   setModalValue: (modalValue: string) => void;
   person: string;
+  modalKeyStudent: keyof StudentRecord;
   task_num: string;
   feedType: string;
   update_Success_Notes: (
     value: string | boolean,
     person: string,
+    modalKeyStudent: keyof StudentRecord,
     task_num: string,
     type: string
   ) => void;
@@ -17,6 +21,7 @@ const InputModal: React.FC<InputModalProps> = ({
   modalValue,
   setModalValue,
   person,
+  modalKeyStudent,
   task_num,
   feedType,
   update_Success_Notes,
@@ -54,7 +59,7 @@ const InputModal: React.FC<InputModalProps> = ({
             value={modalValue}
             onChange={(e) => {
               setModalValue(e.target.value);
-              update_Success_Notes(e.target.value, person, task_num, feedType);
+              update_Success_Notes(e.target.value, person, modalKeyStudent, task_num, feedType);
             }}
             style={{ width: "100%", height: "100px" }}
           />

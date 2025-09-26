@@ -1,26 +1,10 @@
 import { useState } from "react";
 import Session from "./Session";
+import type {  SessionRecord } from "./types/interfaces";
 
-interface TaskObj {
-  task: string;
-  success: boolean; // or boolean if you want
-  correct: string;
-  incorrect: string;
-}
-
-interface TaskNumProps {
-  [key: string]: TaskObj;
-}
-
-// students keyed by name
-type StudentTasks = Record<string, TaskNumProps>;
-
-interface SessionStudentTasks {
-  [sessionCode: string]: StudentTasks;
-}
 
 function App() {
-  const [sessions, setSessions] = useState<SessionStudentTasks>({});
+  const [sessions, setSessions] = useState<Record<string, SessionRecord>>({});
   const [createNew, setCreateNew] = useState<string>("");
 
   const handleNew = () => {
