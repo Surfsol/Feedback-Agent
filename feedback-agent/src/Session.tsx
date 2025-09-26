@@ -1,39 +1,22 @@
 import React, { useState } from "react";
 import rawFeedback from "./encounters2.json";
 import InputModal from "./InputModal";
-import type { StudentNames, StudentRecord } from "./types/interfaces";
+import type {
+  StudentNames,
+  StudentRecord,
+  ActiveSessions,
+} from "./types/interfaces";
 
 const feedback = rawFeedback as StudentNames;
-
-// type TaskNumProps = Record<string, AnyTask>;
-
-// type AnyTask = TaskObj | NotesObj | PassObj
-
-// interface TaskObj {
-//   task: string;
-//   success: boolean; // or boolean if you want
-//   correct: string;
-//   incorrect: string;
-// }
-
-// type NotesObj = { teacher_notes: string };
-// type PassObj = { success: boolean };
-
-// // students keyed by name
-// type StudentTasks = Record<string, TaskNumProps>;
-
-interface SessionStudentTasks {
-  [sessionCode: string]: StudentNames;
-}
 
 interface SessionProps {
   session_code: string;
   current_session: StudentNames;
-  setSessions: React.Dispatch<React.SetStateAction<SessionStudentTasks>>;
+  setSessions: React.Dispatch<React.SetStateAction<ActiveSessions>>;
 }
 
 interface ResponseDataProps {
-  [session_code: string] : {[student_code: string]: { feedback: "" }};
+  [session_code: string]: { [student_code: string]: { feedback: "" } };
 }
 
 // to add Modal input
@@ -63,7 +46,7 @@ const Session: React.FC<SessionProps> = ({
 
   const handleGetFeedBack = async () => {
     let objNotes: any = {};
-    console.log({current_session})
+    console.log({ current_session });
     Object.keys(current_session).map((code) => {
       if (!objNotes[code]) {
         objNotes[code] = {};
@@ -90,7 +73,7 @@ const Session: React.FC<SessionProps> = ({
       session_code: session_code,
       student_codes: objNotes,
     };
-    console.log({objPost})
+
     try {
       const response = await fetch("http://127.0.0.1:5000/feedback", {
         method: "POST",
@@ -115,8 +98,8 @@ const Session: React.FC<SessionProps> = ({
       const student_code = crypto.randomUUID();
       const removeWhitespace = newName.trim().replace(/\s+/g, " ");
       const tasks = feedback[encounter_num];
-      const studentRecords: StudentRecord = JSON.parse(JSON.stringify(tasks))
-      studentRecords["student_name"]["name"] = removeWhitespace
+      const studentRecords: StudentRecord = JSON.parse(JSON.stringify(tasks));
+      studentRecords["student_name"]["name"] = removeWhitespace;
       setSessions((prev) => ({
         ...prev,
         [session_code]: {
@@ -349,35 +332,38 @@ const Session: React.FC<SessionProps> = ({
                   }
                 })}
               </div>
-              {responseData && responseData?.[session_code][person]?.feedback && (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "5px",
-                    border: "1px solid #ccc",
-                    padding: "5px 10px",
-                    borderRadius: "6px",
-                    backgroundColor: "#f9f9f9",
-                    color: "#000",
-                    maxWidth: "50%", // 🚨 limits width to half of page
-                    wordWrap: "break-word", // wraps long words
-                    whiteSpace: "pre-wrap", // preserves line breaks
-                    overflowWrap: "break-word",
-                  }}
-                >
-                  <span style={{ flex: 1 }}>
-                    {responseData[session_code][person]["feedback"]}
-                  </span>
-                  <button
-                    onClick={() =>
-                      copyToClipboard(responseData[session_code][person]["feedback"])
-                    }
+              {responseData &&
+                responseData?.[session_code][person]?.feedback && (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      border: "1px solid #ccc",
+                      padding: "5px 10px",
+                      borderRadius: "6px",
+                      backgroundColor: "#f9f9f9",
+                      color: "#000",
+                      maxWidth: "50%", // 🚨 limits width to half of page
+                      wordWrap: "break-word", // wraps long words
+                      whiteSpace: "pre-wrap", // preserves line breaks
+                      overflowWrap: "break-word",
+                    }}
                   >
-                    Copy
-                  </button>
-                </div>
-              )}
+                    <span style={{ flex: 1 }}>
+                      {responseData[session_code][person]["feedback"]}
+                    </span>
+                    <button
+                      onClick={() =>
+                        copyToClipboard(
+                          responseData[session_code][person]["feedback"]
+                        )
+                      }
+                    >
+                      Copy
+                    </button>
+                  </div>
+                )}
             </>
           ))}
       </div>

@@ -36,6 +36,9 @@ type StudentNames = Record<string, StudentRecord>; // keyed by student id
 //                                                                   "pass": {"success": true}, 
 //                                                                    "tasks": {'2.1': {'task': 'Can use general language related to a job', 'success': True, 'correct': "I'm in charge of ,  I have to , I manage, My duties are ...., I am responsible for reporting ....",
 //                                                       'Monique': {"notes": .....}}
+
+type ActiveSessions = Record<string, Record<string, StudentRecord>>;
+
 interface SessionRecord {
   lesson: string;
   session_code: string;
@@ -43,4 +46,4 @@ interface SessionRecord {
   // { "Claudia": StudentRecord, "Paola": StudentRecord }
 }
 
-export type { TaskObj, StudentRecord, StudentNames, SessionRecord };
+export type { TaskObj, StudentRecord, StudentNames, SessionRecord, ActiveSessions };

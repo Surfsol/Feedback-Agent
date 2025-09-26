@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Session from "./Session";
-import type {  SessionRecord } from "./types/interfaces";
+import type { ActiveSessions } from "./types/interfaces";
 
 
 function App() {
-  const [sessions, setSessions] = useState<Record<string, SessionRecord>>({});
+  const [sessions, setSessions] = useState<ActiveSessions>({});
   const [createNew, setCreateNew] = useState<string>("");
 
   const handleNew = () => {
