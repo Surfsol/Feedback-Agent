@@ -18,8 +18,7 @@ interface SessionProps {
 interface ResponseDataProps {
   [session_code: string]: { [student_code: string]: { feedback: "" } };
 }
-
-// to add Modal input
+// Save to local storage 
 // voice input
 // Rag, to get examples that are not straight forward
 
@@ -344,7 +343,7 @@ const Session: React.FC<SessionProps> = ({
                       borderRadius: "6px",
                       backgroundColor: "#f9f9f9",
                       color: "#000",
-                      maxWidth: "50%", // 🚨 limits width to half of page
+                      maxWidth: "25%", // 🚨 limits width 
                       wordWrap: "break-word", // wraps long words
                       whiteSpace: "pre-wrap", // preserves line breaks
                       overflowWrap: "break-word",
