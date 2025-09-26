@@ -1,7 +1,3 @@
-interface AllTasks {
-  [key: string]: StudentTasks;
-}
-
 interface TaskObj {
   task: string;
   success: boolean;
@@ -10,12 +6,13 @@ interface TaskObj {
 }
 
 interface StudentRecord {
+  student_name: {name: string};
   notes: { teacher_notes: string };
   pass: { success: boolean };
   tasks: Record<string, TaskObj>; // task numbers like "2.1.a", "3.1"
 }
 
-// {
+// {   "student_name": {"name": ""},
 //     "notes": {"teacher_notes": ""},
 //     "pass": {"success": true},
 //     "tasks": {
@@ -41,9 +38,9 @@ type StudentNames = Record<string, StudentRecord>; // keyed by student id
 //                                                       'Monique': {"notes": .....}}
 interface SessionRecord {
   lesson: string;
-  code: string;
-  comments?: StudentNames; 
+  session_code: string;
+  student_codes?: StudentNames; 
   // { "Claudia": StudentRecord, "Paola": StudentRecord }
 }
 
-export type { TaskObj, StudentRecord, StudentNames, AllTasks, SessionRecord };
+export type { TaskObj, StudentRecord, StudentNames, SessionRecord };

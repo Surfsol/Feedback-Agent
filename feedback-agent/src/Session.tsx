@@ -33,7 +33,7 @@ interface SessionProps {
 }
 
 interface ResponseDataProps {
-  [person: string]: { feedback: "" };
+  [session_code: string] : {[student_code: string]: { feedback: "" }};
 }
 
 // to add Modal input
@@ -50,43 +50,47 @@ const Session: React.FC<SessionProps> = ({
     return match ? match[1] : "";
   });
   const [responseData, setResponseData] = useState<ResponseDataProps>();
-  console.log({responseData})
+  console.log({ responseData });
   const [newName, setNewName] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalValue, setModalValue] = useState<string>("");
   const [feedType, setFeedType] = useState<string>("");
   const [modalTaskNum, setModalTaskNum] = useState<string>("");
   const [modalPerson, setModalPerson] = useState<string>("");
-  const [modalKeyStudent, setModalKeyStudent] = useState<keyof StudentRecord>("tasks");
-  console.log({newName})
+  const [modalKeyStudent, setModalKeyStudent] =
+    useState<keyof StudentRecord>("tasks");
+  console.log({ newName });
 
   const handleGetFeedBack = async () => {
     let objNotes: any = {};
-    Object.keys(current_session).map((name) => {
-      if (!objNotes[name]) {
-        objNotes[name] = {};
+    console.log({current_session})
+    Object.keys(current_session).map((code) => {
+      if (!objNotes[code]) {
+        objNotes[code] = {};
       }
-      Object.keys(current_session[name]).map((item) => {
-        if (item == "pass" || item == "notes")
-          objNotes[name][item] = current_session[name][item];
+      Object.keys(current_session[code]).map((item) => {
+        if (item == "pass" || item == "notes" || item == "student_name")
+          objNotes[code][item] = current_session[code][item];
         if (item == "tasks") {
-          Object.keys(current_session[name]["tasks"]).map((task) => {
+          Object.keys(current_session[code]["tasks"]).map((task) => {
             if (
-              current_session[name]["tasks"][task]["correct"] != "" ||
-              current_session[name]["tasks"][task]["incorrect"] != ""
+              current_session[code]["tasks"][task]["correct"] != "" ||
+              current_session[code]["tasks"][task]["incorrect"] != ""
             ) {
-              objNotes[name][task] = current_session[name]["tasks"][task];
+              objNotes[code][task] = current_session[code]["tasks"][task];
             }
           });
         }
       });
     });
+    //console.log({objNotes, current_session})
 
     const objPost = {
       lesson: encounter_num,
-      code: session_code,
-      comments: current_session,
+      session_code: session_code,
+      student_codes: objNotes,
     };
+    console.log({objPost})
     try {
       const response = await fetch("http://127.0.0.1:5000/feedback", {
         method: "POST",
@@ -99,7 +103,7 @@ const Session: React.FC<SessionProps> = ({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       let data = await response.json();
-      console.log({data})
+      console.log({ data });
       setResponseData(data.feedback);
     } catch (error) {
       console.error("Error sending data:", error);
@@ -108,12 +112,17 @@ const Session: React.FC<SessionProps> = ({
 
   const AddStudent = () => {
     if (newName != "" && encounter_num) {
+      const student_code = crypto.randomUUID();
       const removeWhitespace = newName.trim().replace(/\s+/g, " ");
       const tasks = feedback[encounter_num];
-      const studentRecords: StudentRecord = JSON.parse(JSON.stringify(tasks));
+      const studentRecords: StudentRecord = JSON.parse(JSON.stringify(tasks))
+      studentRecords["student_name"]["name"] = removeWhitespace
       setSessions((prev) => ({
         ...prev,
-        [session_code]: { ...prev[session_code], [removeWhitespace]: studentRecords },
+        [session_code]: {
+          ...prev[session_code],
+          [student_code]: studentRecords,
+        },
       }));
       setNewName("");
     }
@@ -200,9 +209,9 @@ const Session: React.FC<SessionProps> = ({
           Object.keys(current_session).map((person) => (
             <>
               <div key={`student-${person}`}>
-                <h3>{person}</h3>
+                <h3>{current_session[person]["student_name"]["name"]}</h3>
                 {Object.keys(current_session[person]).map((item) => {
-                  console.log({person})
+                  console.log({ person });
                   if (item == "tasks") {
                     return Object.keys(current_session[person]["tasks"]).map(
                       (task_num: string) => (
@@ -340,7 +349,7 @@ const Session: React.FC<SessionProps> = ({
                   }
                 })}
               </div>
-              {responseData && responseData?.[person]?.feedback && (
+              {responseData && responseData?.[session_code][person]?.feedback && (
                 <div
                   style={{
                     display: "flex",
@@ -358,11 +367,11 @@ const Session: React.FC<SessionProps> = ({
                   }}
                 >
                   <span style={{ flex: 1 }}>
-                    {responseData[person]["feedback"]}
+                    {responseData[session_code][person]["feedback"]}
                   </span>
                   <button
                     onClick={() =>
-                      copyToClipboard(responseData[person]["feedback"])
+                      copyToClipboard(responseData[session_code][person]["feedback"])
                     }
                   >
                     Copy
