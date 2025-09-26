@@ -1,26 +1,10 @@
 import { useState } from "react";
 import Session from "./Session";
+import type { ActiveSessions } from "./types/interfaces";
 
-interface TaskObj {
-  task: string;
-  success: boolean; // or boolean if you want
-  correct: string;
-  incorrect: string;
-}
-
-interface TaskNumProps {
-  [key: string]: TaskObj;
-}
-
-// students keyed by name
-type StudentTasks = Record<string, TaskNumProps>;
-
-interface SessionStudentTasks {
-  [sessionCode: string]: StudentTasks;
-}
 
 function App() {
-  const [sessions, setSessions] = useState<SessionStudentTasks>({});
+  const [sessions, setSessions] = useState<ActiveSessions>({});
   const [createNew, setCreateNew] = useState<string>("");
 
   const handleNew = () => {
@@ -33,13 +17,11 @@ function App() {
       setCreateNew("");
     }
   };
-  console.log({ sessions });
 
   return (
     <div style={{ backgroundColor: "#001f3f", minHeight: "100vh", color: "white", padding: "20px" }}>
       <h1>WSE Feedback</h1>
       <div>
-        <label htmlFor='encounter-num'>Encounter</label>
         <br />
         <label htmlFor='createNew-num' style={{ marginRight: "8px" }}>Encounter #</label>
         <input
@@ -47,12 +29,12 @@ function App() {
           type='text'
           value={createNew}
           onChange={(e) => setCreateNew(e.target.value)}
-          style={{ width: "60px" }} // small input box
+          style={{ width: "20px", marginBottom: "5px" }} // small input box
         />
         <br />
       </div>
-      <button onClick={handleNew}>Create New Session</button>
-      <div>Sessions</div>
+      <button onClick={handleNew} style={{ marginBottom: "15px" }}>Create New Session</button>
+      <br/>
       {Object.keys(sessions).length > 0 &&
         Object.keys(sessions).map((code) => (
           <div
